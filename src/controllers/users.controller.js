@@ -69,9 +69,7 @@ export const changePassword = async (req, res) => {
       [ password, identification]
     );
     console.log('CONSOLELOG DESDE BACKEND CHANGEPASSWORD',result);
-    res.status(200).JSON({
-      message: "Password updated",
-    });
+    res.status(200).send("Password updated");
   } catch (error) {
     console.error(error);
     res.status(500).send("Error updating user password");
