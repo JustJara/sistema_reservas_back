@@ -61,8 +61,8 @@ export const changePassword = async (req, res) => {
   try {
     const { identification } = req.params;
     const { password } = req.body;
-    console.log(identification);
-    console.log(password);
+    console.log('CONSOELOG DESDE BACKEND',identification);
+    console.log('CONSOLELOG DESDE BACKEDN',password);
 
     const result = await pool.query(
       "UPDATE Users SET password = (?) WHERE identification = (?)",
