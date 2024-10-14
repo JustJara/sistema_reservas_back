@@ -1,0 +1,31 @@
+{
+  "name": "sistema_reservas_udem",
+  "version": "1.0.0",
+  "description": "## Autores",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon src/index.js",
+    "start": "node src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JustJara/sistema_reservas_udem_MVP.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JustJara/sistema_reservas_udem_MVP/issues"
+  },
+  "homepage": "https://github.com/JustJara/sistema_reservas_udem_MVP#readme",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "mariadb": "^3.3.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7"
+  }
+}
