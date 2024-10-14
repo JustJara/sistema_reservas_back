@@ -1,14 +1,14 @@
 import { pool } from "../db.js";
 
-export const getEmployee = async (req, res) => {
-    try {
-        const rows = await pool.query("SELECT * FROM Users");
-        res.json(rows);
-    } catch (error) {
-        console.error(error);
-        res.status(500).send("Error getting employees");
-    }
-    };
+// export const getEmployee = async (req, res) => {
+//     try {
+//         const rows = await pool.query("SELECT * FROM Users");
+//         res.json(rows);
+//     } catch (error) {
+//         console.error(error);
+//         res.status(500).send("Error getting employees");
+//     }
+//     };
 
 export const getUserByIdentification = async (req, res) => {
   try{
@@ -31,48 +31,48 @@ export const getUserByIdentification = async (req, res) => {
   }
 }
 
-export const createEmployee = async (req, res) => {
-  const { identification, email, password } = req.body;
-  try {
-    const result = await pool.query(
-      "INSERT INTO Users (identification, email, password) VALUES (?, ?, ?)",
-      [identification, email, password]
-    );
+// export const createEmployee = async (req, res) => {
+//   const { identification, email, password } = req.body;
+//   try {
+//     const result = await pool.query(
+//       "INSERT INTO Users (identification, email, password) VALUES (?, ?, ?)",
+//       [identification, email, password]
+//     );
 
-    // Convert BigInt values to strings
-    const resultStringified = JSON.parse(
-      JSON.stringify(result, (key, value) =>
-        typeof value === "bigint" ? value.toString() : value
-      )
-    );
+//     // Convert BigInt values to strings
+//     const resultStringified = JSON.parse(
+//       JSON.stringify(result, (key, value) =>
+//         typeof value === "bigint" ? value.toString() : value
+//       )
+//     );
 
-    // DE ESTA MANERA PUEDO DEVOLVER DATOS QUE QUIERO DE LA BASE DE DATOS (RESPONSE)
-    res.send({
-      identification,
-      email,
-    });
-  } catch (error) {
-    console.error(error);
-    res.status(500).send("Error creating employee");
-  }
-};
+//     // DE ESTA MANERA PUEDO DEVOLVER DATOS QUE QUIERO DE LA BASE DE DATOS (RESPONSE)
+//     res.send({
+//       identification,
+//       email,
+//     });
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).send("Error creating employee");
+//   }
+// };
 
-export const updateEmployee = async (req, res) => {
+export const changePassword = async (req, res) => {
   try {
     const { identification } = req.params;
-    const { email, password } = req.body;
+    const { password } = req.body;
     console.log(identification);
-    console.log(email, password);
+    console.log(password);
 
     const result = await pool.query(
-      "UPDATE Users SET email = IFNULL(?,email), password = IFNULL(?,password) WHERE identification = (?)",
-      [email, password, identification]
+      "UPDATE Users SET password = (?) WHERE identification = (?)",
+      [ password, identification]
     );
-    console.log(result);
-    res.send("Employee updated");
+    console.log('CONSOLELOG DESDE BACKEND CHANGEPASSWORD',result);
+    res.status(204);
   } catch (error) {
     console.error(error);
-    res.status(500).send("Error updating employee");
+    res.status(500).send("Error updating user password");
   }
 };
 
