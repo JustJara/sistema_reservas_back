@@ -4,13 +4,13 @@ import {
   createEmployee,
   updateEmployee,
   deleteEmployee,
-  getEmployeeById,
-} from "../controllers/employees.controller.js";
+  getUserByIdentification,
+} from "../controllers/users.controller.js";
 
 const router = Router();
 
 router.get("/employees", getEmployee);
-router.get("/employee/:identification", getEmployeeById);
+router.get("/users/:identification", getUserByIdentification);
 router.post("/employees", createEmployee);
 router.patch("/employee/:identification", updateEmployee);
 router.delete("/employee/:identification", deleteEmployee);

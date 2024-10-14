@@ -10,27 +10,26 @@ export const getEmployee = async (req, res) => {
     }
     };
 
-export const getEmployeeById = async (req, res) => {
-  try {
+export const getUserByIdentification = async (req, res) => {
+  try{
     const identification = String(req.params.identification);
-    const rows = await pool.query(
-      "SELECT * FROM Users WHERE identification = (?)",
-      [identification]
-    );
+    console.log(identification);
+    const rows = await pool.query("SELECT * FROM Users WHERE identification = (?)", [identification]);
     console.log("TIPO DE DATO", typeof rows);
 
     if (typeof rows === typeof undefined)
       return res.status(404).json({
-        message: "Employee not found",
+        message: "User not found",
       });
 
     console.log(rows);
     res.json(rows);
-  } catch (error) {
-    console.error(error);
-    res.status(500).send("Error getting employee");
   }
-};
+  catch (error) {
+    console.error(error);
+    res.status(500).send("Error getting user");
+  }
+}
 
 export const createEmployee = async (req, res) => {
   const { identification, email, password } = req.body;
