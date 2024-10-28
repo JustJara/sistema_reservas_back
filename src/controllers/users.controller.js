@@ -13,16 +13,13 @@ export const getEmployee = async (req, res) => {
 export const getUserByIdentification = async (req, res) => {
   try{
     const identification = String(req.params.identification);
-    console.log(identification);
     const rows = await pool.query("SELECT * FROM Users WHERE identification = (?)", [identification]);
-    console.log("TIPO DE DATO", typeof rows);
 
     if (typeof rows === typeof undefined)
       return res.status(404).json({
         message: "User not found",
       });
 
-    console.log(rows);
     res.json(rows);
   }
   catch (error) {
