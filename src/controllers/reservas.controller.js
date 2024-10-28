@@ -1,13 +1,14 @@
+import { pool } from "../db.js";
+
 export const makeReservation = async (req, res) => {
     try {
-        const { identification, timeFormatted, spaceId } = req.body;
-        let p_records = 0;
+        const { identification, fechaReserva , startTime, endTime, spaceId } = JSON.parse(req.body);
         const result = await pool.query(
-        "CALL pr_insert_reserva(?, ?, ?, ?, ?, ?)",
-        [identification, email, time, spaceId,p_records]
+        "INSERT INTO reservas(id_usuario,fecha_de_reserva,hora_inicio_reserva,hora_fin_reserva,espacio_reserva) VALUES (?, ?, ?, ?, ?);",
+        [identification, fechaReserva, startTime, endTime, spaceId]
         );
     
-        res.status(200).send(p_records);
+        res.status(200).send(result);
     } catch (error) {
         console.error(error);
         res.status(500).send("Error creating reservation");
