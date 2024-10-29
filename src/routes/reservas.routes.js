@@ -4,6 +4,6 @@ import { makeReservation, getReservationsForSpaceByDate } from "../controllers/r
 const router = Router();
 
 router.post("/reservation", makeReservation);
-router.get("/reservations/:fechaReserva/:spaceId", getReservationsForSpaceByDate);
+router.get("/reservations", getReservationsForSpaceByDate);
 
 export default router;
