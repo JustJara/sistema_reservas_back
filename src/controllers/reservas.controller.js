@@ -29,7 +29,8 @@ export const getReservationsForSpaceByDate = async (req, res) => {
         const { fechaReserva } = String(req.params.fechaReserva);
         console.log("🚀 ~ getReservationsForSpaceByDate ~ fechaReserva:", fechaReserva)
         
-        const rows = await pool.query("SELECT * FROM reservas WHERE fecha_de_reserva = (?) AND espacio_reserva = (?);", [fechaReserva, spaceId]);
+        // const rows = await pool.query("SELECT * FROM reservas WHERE fecha_de_reserva = (?) AND espacio_reserva = (?);", [fechaReserva, spaceId]);
+        const rows = await pool.query("SELECT * FROM reservas WHERE fecha_de_reserva = ('2024-10-28') AND espacio_reserva = 'gym';");
         console.log("🚀 ~ getReservationsForSpaceByDate ~ rows:", rows)
         res.json(rows);
     }
