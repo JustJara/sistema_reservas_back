@@ -24,17 +24,23 @@ export const makeReservation = async (req, res) => {
 
 export const getReservationsForSpaceByDate = async (req, res) => {
     try{
-        console.log("🚀 ~ getReservationsForSpaceByDate ~ req.params:", req.query)
+
         const { fechaReserva, spaceId } = req.query;
-        console.log("🚀 ~ getReservationsForSpaceByDate ~ spaceId:", spaceId)
-        console.log("🚀 ~ getReservationsForSpaceByDate ~ fechaReserva:", fechaReserva)
-        
-        const rows = await pool.query("SELECT * FROM reservas WHERE fecha_de_reserva = (?) AND espacio_reserva = (?);", [fechaReserva, spaceId]);
-        // const rows = await pool.query("SELECT * FROM reservas WHERE fecha_de_reserva = ('2024-10-28') AND espacio_reserva = 'gym';");
-        console.log("🚀 ~ getReservationsForSpaceByDate ~ rows:", rows)
+        const rows = await pool.query("SELECT * FROM reservas WHERE fecha_de_reserva > (?) AND espacio_reserva = (?);", [fechaReserva, spaceId]);
         res.json(rows);
     }
     catch (error) {
+        console.error(error);
+        res.status(500).send("Error getting reservations");
+    }
+}
+
+export const getReservationsById = async (req, res) => {
+    try {
+        const identification = req.params.identification;
+        const rows = await pool.query("SELECT * FROM reservas WHERE id_usuario = (?);", [identification]);
+        res.json(rows);
+    } catch (error) {
         console.error(error);
         res.status(500).send("Error getting reservations");
     }
