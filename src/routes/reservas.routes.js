@@ -1,5 +1,5 @@
 import Router from "express";
-import { makeReservation, getReservationsByDate } from "../controllers/reservas.controller.js";
+import { makeReservation, getReservationsForSpaceByDate } from "../controllers/reservas.controller.js";
 
 const router = Router();
 
