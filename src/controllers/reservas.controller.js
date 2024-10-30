@@ -50,7 +50,12 @@ export const deleteRservationById = async (req, res) => {
     try {
         const { id_reserva, identification } = req.query;
         const result = await pool.query("DELETE FROM reservas WHERE id_reserva = (?) AND id_usuario = (?);", [id_reserva, identification]);
-        res.json(result);
+        const resultStringified = JSON.parse(
+            JSON.stringify(result, (key, value) =>
+                typeof value === "bigint" ? value.toString() : value
+            )
+        );
+        res.json(resultStringified);
     } catch (error) {
         console.error(error);
         res.status(500).send("Error deleting reservation");
