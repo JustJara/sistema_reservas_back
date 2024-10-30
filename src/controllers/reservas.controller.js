@@ -27,6 +27,7 @@ export const getReservationsForSpaceByDate = async (req, res) => {
 
         const { fechaReserva, spaceId } = req.query;
         const rows = await pool.query("SELECT * FROM reservas WHERE fecha_de_reserva = (?) AND espacio_reserva = (?);", [fechaReserva, spaceId]);
+        console.log("🚀 ~ getReservationsForSpaceByDate ~ fechaReserva:", fechaReserva)
         res.json(rows);
     }
     catch (error) {
