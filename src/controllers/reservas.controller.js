@@ -45,3 +45,14 @@ export const getReservationsById = async (req, res) => {
         res.status(500).send("Error getting reservations");
     }
 }
+
+export const deleteRservationById = async (req, res) => {
+    try {
+        const { id_reserva, identification } = req.query;
+        const result = await pool.query("DELETE FROM reservas WHERE id_reserva = (?) AND id_usuario = (?);", [id_reserva, identification]);
+        res.json(result);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Error deleting reservation");
+    }
+}
