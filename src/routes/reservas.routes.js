@@ -5,7 +5,7 @@ const router = Router();
 
 router.post("/reservation", makeReservation);
 router.get("/reservations", getReservationsForSpaceByDate);
-router.get("/reservation/:identification", getReservationsById);
+router.get("/reservationById/", getReservationsById);
 router.delete("/reservation", deleteRservationById);
 
 export default router;

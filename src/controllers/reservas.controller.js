@@ -37,8 +37,8 @@ export const getReservationsForSpaceByDate = async (req, res) => {
 
 export const getReservationsById = async (req, res) => {
     try {
-        const identification = req.params.identification;
-        const rows = await pool.query("SELECT * FROM reservas WHERE id_usuario = (?) AND fecha_de_reserva >= CURDATE();", [identification]);
+        const { identification, fechaReserva } = req.query;
+        const rows = await pool.query("SELECT * FROM reservas WHERE id_usuario = (?) AND fecha_de_reserva >= (?);", [identification, fechaReserva]);
         res.json(rows);
     } catch (error) {
         console.error(error);
